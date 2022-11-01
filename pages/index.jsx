@@ -28,6 +28,11 @@ export default function Home() {
   //   loginStatus();
   // }, [])
 
+  //* go straight to login screen
+  useEffect(() => {
+    router.push('/login')
+  }, [])
+
   useEffect(() => {
     // todo - display LoadingScreen so the homepage doesn't flash
     if (user) {

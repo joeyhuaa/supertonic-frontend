@@ -1,12 +1,12 @@
 function getApiUrl() {
   //! temp
-  let env = 'dev';
+  let env = 'prod';
 
   switch(env) {
     case 'dev':
       return 'http://localhost:4000'; //this is what the BE is running on in development
     default:
-      return 'https://api.supertonic.vercel.app';
+      return 'https://supertonic-backend.herokuapp.com';
   }
 }
 

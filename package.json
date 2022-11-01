@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:4000",
+  "engines": {
+    "node": "14.18.1"
+  },
   "scripts": {
     "dev": "next dev",
     "dev2": "next dev -p 3001",

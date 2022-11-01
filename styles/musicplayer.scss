@@ -1,0 +1,73 @@
+#player_container {
+  height: 15vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  flex: 100%;
+  align-self: flex-end;
+  // border: solid 1px pink;
+
+  #pButton {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #pButton:focus {
+    outline:none;   
+  }
+  #pButton:hover {
+    cursor:pointer;
+  }
+  
+  .player_info {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: solid rgb(126, 126, 126) 1px;
+  }
+  
+  .timestamp {
+    font-size: 12px;
+    width: 30px;
+    text-align: center;
+  }
+  
+  .song_title {
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 1em;
+  }
+  
+  #timeline {
+    width: 400px;
+    height: 5px;
+    background: rgb(0, 0, 0);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  #timeline:hover {
+    cursor:pointer; 
+  }
+  #timeline_past {
+    border-radius: 15px;
+    background-color: white;
+    height: 100%;
+    position: absolute;
+  }
+  
+  #playhead {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 1px;
+    background-color: white;
+  }
+}

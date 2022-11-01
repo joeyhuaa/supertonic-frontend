@@ -1,0 +1,33 @@
+#rightsidebar {
+  width: 350px;
+  height: 85vh;
+  position: relative;
+
+  #top {
+    border-bottom: solid gray 1px;
+    padding-bottom: 10px;
+  }
+
+  #browser {
+    overflow: auto;
+    height: 70%;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    // border: solid orange 1px;
+  }
+
+  #new-project-btn {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .project > .delete-proj-btn {
+    visibility: hidden;
+  }
+
+  .project:hover > .delete-proj-btn {
+    visibility: visible;
+  }
+}

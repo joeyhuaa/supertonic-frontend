@@ -1,0 +1,66 @@
+#empty-songs {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #file-input {
+    display: flex;
+
+    #file {
+      display: none;
+    }
+
+    label {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+}
+
+#songs {
+  height: 90%;
+  width: 100%;
+  overflow: auto;
+  padding-bottom: 40px;
+
+  .song {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    max-width: 700px;
+    font-size: 14px;
+
+    .song-item {
+      padding-right: 30px;
+    }
+
+    .play {
+      flex: 10%;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+
+    .name {
+      flex: 40%;
+    }
+
+    .time {
+      flex: 10%;
+      opacity: 0.75;
+    }
+
+    .date {
+      flex: 25%;
+      opacity: 0.75;
+    }
+
+    .filechange {
+      flex: 7.5%;
+      opacity: 0.75;
+    }
+  }  
+}

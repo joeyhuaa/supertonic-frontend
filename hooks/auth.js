@@ -34,6 +34,7 @@ export function useLogin() {
 }
 
 export function useLogout() {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { setUser, setCurrSong } = useStore.getState();
 
@@ -51,7 +52,8 @@ export function useLogout() {
         setUser(null);
         setCurrSong(null);
       },
-      onSuccess: (data) => {
+      onSuccess: () => {
+        queryClient.clear() //clear memory
         console.log('logged out!');
       }
     }

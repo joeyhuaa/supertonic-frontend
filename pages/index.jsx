@@ -29,6 +29,7 @@ export default function Home() {
   // }, [])
 
   //* go straight to login screen
+  //! temp
   useEffect(() => {
     router.push('/login')
   }, [])
@@ -54,8 +55,14 @@ export default function Home() {
   return (
     <PageWrapper>
       <h1>Welcome to SuperTonic</h1>
-      <Link href='/login'>Log In</Link>
-      <Link href='/signup'>Sign Up</Link>
+      {/* <Link href='/login'>Log In</Link>
+      <Link href='/signup'>Sign Up</Link> */}
+      <button>
+        Open App
+      </button>
+      <button>
+        Learn
+      </button>
     </PageWrapper>
   )
 }

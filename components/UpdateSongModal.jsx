@@ -45,7 +45,7 @@ export default function UpdateSongModal() {
               <ClipLoader color='white' />
             ) : (
               <button
-                className='round-btn submit-btn grow'
+                className='oval-btn submit-btn grow'
                 onClick={handleUpdateSong}
               >Update Song</button>
             )}

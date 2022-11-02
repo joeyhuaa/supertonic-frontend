@@ -56,7 +56,7 @@ const ShareProjectModal = () => {
           </div>
           <div>
             <button 
-              className='round-btn submit-btn grow'
+              className='oval-btn submit-btn grow'
               onClick={copyLinkToClipboard}
             >Copy Link</button>
           </div>

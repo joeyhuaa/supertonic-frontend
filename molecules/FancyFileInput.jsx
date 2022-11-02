@@ -3,7 +3,7 @@ import IconClickable from './IconClickable';
 import PropTypes from 'prop-types';
 
 const FancyFileInput = ({ 
-  onChange = () => {}, // ! not working... onChange defaulting to null
+  onChange = () => {}, //! not working... onChange defaulting to null
   icon,
   multiple = false,
   accept = '*',
@@ -17,10 +17,9 @@ const FancyFileInput = ({
   }
 
   return (
-    <div id='fancy-file-input' className={className} style={{ display: 'flex' }}>
+    <div id='fancy-file-input' className={className}>
       <input 
         id='file' 
-        style={{ display: 'none' }}
         type='file' 
         multiple={multiple} 
         onChange={handleChange} 

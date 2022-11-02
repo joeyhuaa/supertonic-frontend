@@ -1,6 +1,6 @@
 function getApiUrl() {
   //! temp
-  let env = 'prod';
+  let env = 'dev';
 
   switch(env) {
     case 'dev':

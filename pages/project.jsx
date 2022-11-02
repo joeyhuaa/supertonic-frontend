@@ -6,7 +6,7 @@ import { css } from '@emotion/react'
 
 import { useStore } from '../data/store'
 
-import { AiOutlineFileAdd } from 'react-icons/ai'
+import { BsFillPeopleFill } from 'react-icons/bs'
 import { BiGitBranch } from 'react-icons/bi'
 import { GoTriangleDown } from 'react-icons/go'
 
@@ -16,7 +16,6 @@ import Page from '../components/Page'
 import Songs from '../components/Songs'
 
 import DropdownMenu from '../molecules/DropdownMenu'
-import FancyFileInput from '../molecules/FancyFileInput'
 
 import  { 
   useProject, 
@@ -24,6 +23,8 @@ import  {
   useDeleteProject,
   useChangeProjectName, 
 } from '../hooks/project'
+import Clickable from '../molecules/Clickable'
+import IconClickable from '../molecules/IconClickable'
 
 //* HEADER COMPONENTS
 const BranchSelect = (props) => {
@@ -77,7 +78,8 @@ const AddBranchForm = ({ project, sourceBranchName }) => {
     >
       <input 
         id='branch-input'
-        placeholder='Add New Branch'
+        style={{ width:'125px' }}
+        placeholder='Add new branch'
         onChange={e => setNewBranchName(e.target.value)}
         value={newBranchName}
       />
@@ -157,19 +159,25 @@ const ProjectHeader = (props) => {
 
   return (
     <div id='header'>
-      <TitleHeading
-        project={project}
-      />
-      <FancyFileInput 
-        className='header-item'
-        icon={<AiOutlineFileAdd size={20} />} 
-        onChange={files => setFiles( Array.from(files) )}
-        accept='.mp3, .wav'
-        multiple
-      />
-      <AddBranchForm 
-        project={project} 
-        sourceBranchName={branchName} 
+      <TitleHeading project={project} />
+      <div className='header-item'>
+        <input 
+          id='file'
+          type='file'
+          onChange={e => setFiles( Array.from(e.target.files) )}
+          accept='.mp3, .wav'
+          multiple
+        />
+        <label htmlFor='file' className='round-btn grow clickable' style={{ border:'solid whitesmoke' }}>
+          + Add Songs
+        </label>
+      </div>
+      <IconClickable 
+        icon={<BsFillPeopleFill />}
+        className='round-btn submit-btn grow header-item'
+        handleClick={() => openModal('share-project')}
+        label='Share'
+        showBorderOnHover
       />
       <BranchSelect 
         className='header-item'
@@ -177,10 +185,10 @@ const ProjectHeader = (props) => {
         currBranch={branchName}
         setCurrBranch={setCurrBranch}
       />
-      <button 
-        className='round-btn submit-btn'
-        onClick={() => openModal('share-project')}
-      >Share</button>
+      <AddBranchForm 
+        project={project} 
+        sourceBranchName={branchName} 
+      />
       {isFetching && (
         <ClipLoader 
           color='whitesmoke' 

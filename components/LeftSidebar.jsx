@@ -26,6 +26,7 @@ export default function LeftSidebar() {
   const { currProject } = useStore.getState();
 
   const { data: projects, isError: projectsError, isLoading: projectsLoading } = useProjects()
+  console.log('projects',projects)
   const _createProject = useCreateProject()
   const _deleteProject = useDeleteProject()
 
@@ -108,7 +109,7 @@ export default function LeftSidebar() {
       <button
         onClick={createProject}
         id='new-project-btn'
-        className='round-btn submit-btn grow'
+        className='oval-btn submit-btn grow'
       >
         New Project
       </button>

@@ -19,12 +19,18 @@ p {
   margin: 0;
 }
 
+label {
+  text-align: center;
+}
+
 button, 
 .clickable {
   color: whitesmoke;
   cursor: pointer;
   border: none;
   outline: none;
+  background-color: transparent;
+  transition: 0.25s;
 }
 
 .clickable {
@@ -75,7 +81,7 @@ select {
   /* border: solid yellow 1px; */
 }
 
-.round-btn {
+.oval-btn {
   outline: none;
   border: none;
   border-top-left-radius: 50px;
@@ -83,7 +89,18 @@ select {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   min-width: 100px;
-  height: 30px;
+  height: 35px;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 10pt;
+}
+
+.round-btn {
+  outline: none;
+  border: none;
+  border-radius: 0.5em;
+  min-width: 100px;
+  height: 35px;
   display: table-cell;
   vertical-align: middle;
   font-size: 10pt;

@@ -7,7 +7,9 @@ const IconClickable = (props) => {
     handleClick = () => {},
     onMouseEnter = () => {},
     onMouseLeave = () => {},
+    showBorderOnHover = false,
     icon,
+    label,
     padding = 5,
     className,
     style,
@@ -16,9 +18,11 @@ const IconClickable = (props) => {
 
   return (
     <Clickable
+      className={className}
       handleClick={handleClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      showBorderOnHover={showBorderOnHover}
       style={{
         ...style,
         display: 'flex',
@@ -26,10 +30,10 @@ const IconClickable = (props) => {
         justifyContent: 'center',
         padding: `${padding}px`
       }}
-      className={className}
     >
       {icon}
       {children}
+      {label && <span style={{ marginLeft:'5px'}}>{label}</span>}
     </Clickable>
   )
 }

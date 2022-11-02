@@ -10,6 +10,7 @@ const Clickable = (props) => {
     handleClick = () => {},
     onMouseEnter = () => {},
     onMouseLeave = () => {},
+    showBorderOnHover,
     style = { padding: '5px' },
     isSelected = false,
   } = props
@@ -38,6 +39,7 @@ const Clickable = (props) => {
       tabIndex='0'
       isSelected={isSelected}
       isHovering={isHovering}
+      showBorderOnHover={showBorderOnHover}
     >
       {children}
     </Elem>
@@ -52,12 +54,15 @@ Clickable.propTypes = {
   handleClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
+  showBorderOnHover: PropTypes.bool,
   style: PropTypes.object,
   isSelected: PropTypes.bool,
 }
 
 const Elem = styled.div`
-  background-color: ${props => (props.isHovering && props.theme.color4) || (props.isSelected && props.theme.color2)}
+  background-color: ${props => (props.isHovering && props.theme.color4) || (props.isSelected && props.theme.color2)};
+  transition: 0.25s;
+  border: ${props => props.showBorderOnHover && (props.isHovering && 'solid whitesmoke')};
 `;
 
 export default Clickable

@@ -31,6 +31,13 @@ button,
   outline: none;
   background-color: transparent;
   transition: 0.25s;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+button:active,
+.clickable:active {
+  background: whitesmoke;
 }
 
 .clickable {
@@ -136,6 +143,18 @@ select {
 .fade-top-bottom {
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 2%, black 95%, transparent);
   mask-image: linear-gradient(to bottom, transparent, black 2%, black 95%, transparent);
+}
+
+.fade-right {
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
+  mask-image: linear-gradient(to right, black 85%, transparent);
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 $sizes: 0, 2, 4, 8, 12, 14, 16, 20, 24, 32, 40, 48, 64, 96, 128, 256;

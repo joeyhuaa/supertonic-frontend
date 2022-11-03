@@ -69,7 +69,7 @@ export default function LeftSidebar() {
         </Supertonic>
         <span>My Projects | Shared w/ Me</span>
       </div>
-      <div id='browser' className='fade-bottom'>
+      <div id='browser'>
         {projectsError && <span>Error.</span>}
         {projectsLoading && <span>Loading...</span>}
         {projects?.map((proj) => {
@@ -83,16 +83,10 @@ export default function LeftSidebar() {
               key={proj.id}
             >
               <div className='project ellipse df aic jc-sb'>
-                {proj.name}
+                <span className='fade-right' style={{width:'170px'}}>{proj.name}</span>
                 <Link
                   className='delete-proj-btn'
-                  href={
-                    currProjId === proj.id ? (
-                      `/projects`
-                    ) : (
-                      `/projects/${currProjId}`
-                    )
-                  }
+                  href={currProjId === proj.id ? `/projects` : `/projects/${currProjId}`}
                 >
                   <IconClickable
                     handleClick={() => deleteProject(proj.id)}

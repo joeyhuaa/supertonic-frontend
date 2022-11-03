@@ -23,6 +23,17 @@ export const useStore = create(persist(
     openModal: (modalName) => set({ modalName: modalName }),
     closeModal: () => set({ modalName: null }),
     playPause: () => set(prev => ({ isSongPlaying: !prev.isSongPlaying })),
+    clearAll: () => set({
+      user: null,
+      projects: null,
+      currProject: null,
+      currBranch: null,
+      currSong: null,
+      isSongPlaying: false,
+      songsToUpload: [],
+      songToUpdate: [],
+      modalName: null
+    })
   }),
   {
     name: 'supertonic-store'

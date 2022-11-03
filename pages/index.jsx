@@ -43,7 +43,7 @@ export default function Home() {
   }, [])
 
   async function loginStatus () {
-    const res = await axios.get('http://localhost:4000/logged_in', { withCredentials: true });
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/logged_in`, { withCredentials: true });
     const { user } = res.data;
     if (user) {
       //* put user in store

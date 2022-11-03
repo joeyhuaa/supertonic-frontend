@@ -30,7 +30,7 @@ export default function UpdateSongModal() {
   return (
     <Modal 
       modalId='update-song-modal'
-      title={`Update Song`}
+      title={`Replace "${songToUpdate.name}"`}
       showClose={!isLoading}
       body={
         <>
@@ -47,7 +47,7 @@ export default function UpdateSongModal() {
               <button
                 className='oval-btn submit-btn grow'
                 onClick={handleUpdateSong}
-              >Update Song</button>
+              >Replace Song</button>
             )}
           </div>
         </>

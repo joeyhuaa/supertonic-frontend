@@ -73,12 +73,13 @@ const AddBranchForm = ({ project, sourceBranchName }) => {
   return (
     <form
       id='branch-form'
-      className='header-item'
+      className='header-item jc-fe mla'
       onSubmit={onSubmit}
     >
       <input 
         id='branch-input'
-        style={{ width:'125px' }}
+        className='oval-btn'
+        style={{ width:'125px', paddingLeft:'10px', paddingRight:'10px' }}
         placeholder='Add new branch'
         onChange={e => setNewBranchName(e.target.value)}
         value={newBranchName}
@@ -108,7 +109,7 @@ const TitleHeading = props => {
   }
 
   return (
-    <div id='heading' className='header-item'>
+    <div className='df aic header-item' style={{ marginBottom:'10px' }}>
       <h2 
         className='ellipse'
         onClick={changeProjName}
@@ -138,7 +139,6 @@ const ProjectHeader = (props) => {
     project,
     branchName,
     setCurrBranch,
-    isFetching,
   } = props
 
   const [files, setFiles] = useState([])
@@ -152,50 +152,40 @@ const ProjectHeader = (props) => {
     }
   }, [files])
 
-  const spinnerCSS = css`
-    position: absolute;
-    right: 30px;
-  `;
-
   return (
-    <div id='header'>
+    <div>
       <TitleHeading project={project} />
-      <div className='header-item'>
-        <input 
-          id='file'
-          type='file'
-          onChange={e => setFiles( Array.from(e.target.files) )}
-          accept='.mp3, .wav'
-          multiple
+      <div id='header'>
+        <div className='header-item'>
+          <input 
+            id='file'
+            type='file'
+            onChange={e => setFiles( Array.from(e.target.files) )}
+            accept='.mp3, .wav'
+            multiple
+          />
+          <label htmlFor='file' className='round-btn grow clickable' style={{ border:'solid whitesmoke' }}>
+            + Add Songs
+          </label>
+        </div>
+        <IconClickable 
+          icon={<BsFillPeopleFill />}
+          className='round-btn submit-btn grow header-item'
+          handleClick={() => openModal('share-project')}
+          label='Share'
+          showBorderOnHover
         />
-        <label htmlFor='file' className='round-btn grow clickable' style={{ border:'solid whitesmoke' }}>
-          + Add Songs
-        </label>
+        <BranchSelect 
+          className='header-item '
+          branches={project.branches} 
+          currBranch={branchName}
+          setCurrBranch={setCurrBranch}
+        />
+        <AddBranchForm 
+          project={project} 
+          sourceBranchName={branchName} 
+        />
       </div>
-      <IconClickable 
-        icon={<BsFillPeopleFill />}
-        className='round-btn submit-btn grow header-item'
-        handleClick={() => openModal('share-project')}
-        label='Share'
-        showBorderOnHover
-      />
-      <BranchSelect 
-        className='header-item'
-        branches={project.branches} 
-        currBranch={branchName}
-        setCurrBranch={setCurrBranch}
-      />
-      <AddBranchForm 
-        project={project} 
-        sourceBranchName={branchName} 
-      />
-      {isFetching && (
-        <ClipLoader 
-          color='whitesmoke' 
-          size={20}
-          css={spinnerCSS}
-        />
-      )}
     </div>
   )
 }
@@ -274,7 +264,7 @@ const ProjectWrapper = styled.section`
   justify-content: center;
   padding: 0;
   flex: 75%;
-  height: 85vh;
+  height: 90vh;
 `;
 
 const ProjectContainer = styled.section`

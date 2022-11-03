@@ -100,7 +100,7 @@ function Song({ song }) {
         items={
           [
             {
-              label: 'Change File',
+              label: 'Replace File',
               onClick: handleOpenUpdateSongModal
             },
             {
@@ -138,7 +138,7 @@ export default function Songs({ project, branchName }) {
   }
   
   return (
-    <div id='songs' className='fade-bottom'>
+    <div id='songs' className='fade-top-bottom'>
       {branch?.songs?.map(song => 
         <div key={song.id}>
           <Song song={song} />

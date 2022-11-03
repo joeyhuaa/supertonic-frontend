@@ -17,15 +17,8 @@
   #header {
     display: flex;
     align-items: center;
-    border-bottom: solid 1px gray;
-    padding-bottom: 10px;
-
-    #heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-width: 60px;
-    }
+    border-bottom: solid 0.5px gray;
+    padding-bottom: 15px;
     
     .branch-dropdown {
       width: 200px;

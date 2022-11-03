@@ -57,7 +57,7 @@ const AddSongsModal = () => {
               <ClipLoader color='white' />
             ) : (
               <button
-                className='oval-btn submit-btn grow'
+                className='round-btn submit-btn grow'
                 onClick={handleAddSongs}
               >Add Songs</button>
             )}

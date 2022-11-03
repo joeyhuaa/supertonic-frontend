@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { useStore } from '../data/store'
-import { apiUrl } from "../env";
 
 export function useStateCallback(initialState) {
   const [state, setState] = useState(initialState);
@@ -28,7 +27,7 @@ export function useTheme() {
   return useQuery(
     ['theme'],
     async () => {
-      let res = await fetch(`${apiUrl}/api/user/theme`)
+      let res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/theme`)
       let { theme } = await res.json()
       return theme
     }
@@ -40,7 +39,7 @@ export function useChangeTheme() {
   const { setUser } = useStore.getState();
 
   return useMutation(
-    data => axios.put(`${apiUrl}/api/user/change_theme`, data).then(res => res.data),
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/user/change_theme`, data).then(res => res.data),
     {
       onMutate: async ({ theme }) => {
         await queryClient.cancelQueries('theme')

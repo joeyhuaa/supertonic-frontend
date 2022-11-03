@@ -2,7 +2,6 @@ import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-import { apiUrl } from "../env";
 import { useStore } from "../data/store";
 
 export function useLogin() {
@@ -13,7 +12,7 @@ export function useLogin() {
     ['login'],
     async (data) => {
       console.log(data);
-      const res = await axios.post(`${apiUrl}/login`, data, { withCredentials: true });
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, data, { withCredentials: true });
       return res.data;
     },
     {
@@ -41,7 +40,7 @@ export function useLogout() {
   return useMutation(
     ['logout'],
     async () => {
-      await axios.delete(`${apiUrl}/logout`, { withCredentials: true });
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/logout`, { withCredentials: true });
     },
     {
       onMutate: () => {
@@ -67,7 +66,7 @@ export function useSignup() {
     ['signup'],
     async (data) => {
       console.log(data)
-      await axios.post(`${apiUrl}/signup`, data, { withCredentials: true });
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signup`, data, { withCredentials: true });
     },
     {
       onError: (error) => {

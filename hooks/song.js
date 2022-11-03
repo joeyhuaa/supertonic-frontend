@@ -1,13 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import axios from 'axios'
 import lodash from 'lodash'
-import { apiUrl } from "../env";
 
 export function useSong(songId) {
   return useQuery(
     ['song', songId],
     async () => {
-      let res = await axios.get(`${apiUrl}/api/songs/${songId}`);
+      let res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/songs/${songId}`);
       return res.data;
     }
   )
@@ -17,7 +16,7 @@ export function useCreateSongs() {
   const queryClient = useQueryClient();
 
   return useMutation(
-    data => axios.put(`${apiUrl}/api/projects/${data.projectId}/add_songs`, data),
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projectId}/add_songs`, data),
     {
       onSuccess: ({ data }) => {
         queryClient.invalidateQueries('projects')
@@ -31,7 +30,7 @@ export function useDeleteSong() {
   const queryClient = useQueryClient()
 
   return useMutation(
-    data => axios.put(`${apiUrl}/api/projects/${data.projectId}/delete_song`, data),
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projectId}/delete_song`, data),
     {
       onMutate: ({ songId, projectId, branchName }) => {
         let songIdToRemove = songId
@@ -67,7 +66,7 @@ export function useDeleteSong() {
 export function useUpdateSong() {
   const queryClient = useQueryClient()
   return useMutation(
-    data => axios.put(`${apiUrl}/api/projects/${data.projectId}/replace_song`, data),
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projectId}/replace_song`, data),
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries('projects')

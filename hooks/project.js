@@ -2,7 +2,6 @@ import { useQuery, useMutation, useQueryClient } from 'react-query'
 import axios from 'axios'
 import { useStore } from '../data/store'
 import { useRouter } from 'next/router';
-import { apiUrl } from "../env";
 
 export function useProjects() {
   const { user, setCurrProjects } = useStore.getState();
@@ -10,7 +9,7 @@ export function useProjects() {
   return useQuery(
     ['projects'],
     async () => {
-      const res = await axios.get(`${apiUrl}/api/projects`, { params: { userId: user.id } });
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, { params: { userId: user.id } });
       return res.data;
     },
     {
@@ -28,8 +27,8 @@ export function useProject(projectId, isShared) {
   return useQuery(
     ['projects', projectId],
     async () => {
-      //! const url = isShared ? `${apiUrl}/api/shared/projects/${projectId}` : `${apiUrl}/api/projects/${projectId}`
-      const url = `${apiUrl}/api/projects/${projectId}`
+      //! const url = isShared ? `${process.env.NEXT_PUBLIC_API_URL}/api/shared/projects/${projectId}` : `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${projectId}`
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${projectId}`
       const res = await axios.post(url, { userId: user.id });
       return res.data;
     },
@@ -48,7 +47,7 @@ export function useChangeProjectName() {
   const { setCurrProject } = useStore.getState()
 
   return useMutation(
-    data => axios.put(`${apiUrl}/api/projects/${data.id}/change_name`, data),
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.id}/change_name`, data),
     {
       onMutate: async projToBeUpdated => {
         await queryClient.cancelQueries('projects')
@@ -83,7 +82,7 @@ export function useCreateProject() {
   const { user } = useStore.getState()
 
   return useMutation(
-    data => axios.post(`${apiUrl}/api/projects/new`, {...data, userId: user.id}),
+    data => axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/new`, {...data, userId: user.id}),
     {
       onMutate: async newProject => {
         console.log(newProject)
@@ -107,7 +106,7 @@ export function useDeleteProject() {
   const router = useRouter();
 
   return useMutation(
-    project => axios.delete(`${apiUrl}/api/projects/${project.id}/destroy`, project).then(res => res.data),
+    project => axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${project.id}/destroy`, project).then(res => res.data),
     {
       onMutate: async project => {
         router.push('/projects');
@@ -128,7 +127,7 @@ export function useCreateBranch() {
   const { setCurrProject } = useStore.getState()
 
   return useMutation(
-    (data) => axios.put(`${apiUrl}/api/projects/${data.projId}/newbranch`, data),
+    (data) => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projId}/newbranch`, data),
     {
       onSettled: ({ data }) => {
         queryClient.invalidateQueries(['projects', data.id])

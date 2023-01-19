@@ -197,7 +197,6 @@ export default function Project({ isShared=false }) {
 
   //* get the projectId from url slug
   let projectId = projectsSlug[projectsSlug.length - 1] || null;
-  // console.log(projectId)
 
   const { data, isError, isLoading, isFetching } = useProject(projectId, isShared)
   const { user, currProject, currBranch, setCurrBranch } = useStore(state => ({
@@ -214,7 +213,7 @@ export default function Project({ isShared=false }) {
 
   return (
     <Page>
-      <ProjectWrapper id={isLoading ? 'loading-project' : 'project'}>
+      <ProjectWrapper id={isLoading ? 'loading-project' : 'project'} className='df'>
         {user && 
           <UserMenu>
             {user.username}
@@ -224,7 +223,7 @@ export default function Project({ isShared=false }) {
                 [
                   {
                     label: 'Profile',
-                    onClick: () => {}
+                    onClick: () => {} //todo
                   },
                   {
                     label: 'Settings',
@@ -270,7 +269,7 @@ const ProjectWrapper = styled.section`
 const ProjectContainer = styled.section`
   height: 100%;
   width: 100%;
-  margin-top: 75px;
+  margin-top: 85px;
 `;
 
 const UserMenu = styled.div`

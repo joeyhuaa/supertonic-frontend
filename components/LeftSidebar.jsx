@@ -21,12 +21,14 @@ export default function LeftSidebar() {
   const [currProjId, setCurrProjId] = useState(null)
   const [isHoveringOverDelete, setHoveringOverDelete] = useState(false)
 
+  //* controls which projects are shown on homepage -- solo projects or shared projects
+  const [activeTab, setActiveTab] = useState(null)
+
   const router = useRouter();
 
   const { currProject } = useStore.getState();
 
   const { data: projects, isError: projectsError, isLoading: projectsLoading } = useProjects()
-  console.log('projects',projects)
   const _createProject = useCreateProject()
   const _deleteProject = useDeleteProject()
 
@@ -57,8 +59,18 @@ export default function LeftSidebar() {
     })
   }
 
-  let deleteProject = (projectId) => {
-    _deleteProject.mutate({ id: projectId })
+  let deleteProject = (projectId) => _deleteProject.mutate({ id: projectId })
+
+  let setTab = tab => {
+    if (!activeTab) setActiveTab(tab)
+    else if (activeTab === tab) setActiveTab(null)
+    else setActiveTab(tab)
+  }
+
+  let getProjects = () => {
+    if (!activeTab) return projects //all
+    else if (activeTab === 'solo-projects') return projects.filter(p => p.users?.length === 1) //solo
+    else return projects.filter(p => p.users?.length > 1) //collab
   }
 
   return (
@@ -67,23 +79,30 @@ export default function LeftSidebar() {
         <Supertonic>
           <Link href='/projects'>SuperTonic</Link>
         </Supertonic>
-        <span>My Projects | Shared w/ Me</span>
+        <div className='df'>
+          <Tab className='clickable' left={10} onClick={() => setTab('solo-projects')} selected={activeTab==='solo-projects'}>
+            Solo Projects
+          </Tab>
+          <Tab className='clickable' left={150} onClick={() => setTab('collab-projects')} selected={activeTab==='collab-projects'}>
+            Collab Projects
+          </Tab>
+        </div>
       </div>
       <div id='browser'>
         {projectsError && <span>Error.</span>}
         {projectsLoading && <span>Loading...</span>}
-        {projects?.map((proj) => {
+        {getProjects() && getProjects().map((proj) => {
           return (
             <Clickable
+              key={proj.id}
               isSelected={currProjId === proj.id}
               handleClick={() => {
                 router.push(`/projects/${proj.id}`)
                 selectProject(proj.id)
               }}
-              key={proj.id}
             >
               <div className='project ellipse df aic jc-sb'>
-                <span className='fade-right' style={{width:'170px'}}>{proj.name}</span>
+                <span className='fade-right' style={{width:'200px'}}>{proj.name}</span>
                 <Link
                   className='delete-proj-btn'
                   href={currProjId === proj.id ? `/projects` : `/projects/${currProjId}`}
@@ -104,9 +123,7 @@ export default function LeftSidebar() {
         onClick={createProject}
         id='new-project-btn'
         className='oval-btn submit-btn grow'
-      >
-        New Project
-      </button>
+      >New Project</button>
     </SidebarWrapper>
   )
 }
@@ -128,4 +145,21 @@ const Supertonic = styled.h1`
     text-shadow: 0px 0px 7px ${COLORS.skyblue};
     transform: scale(1.05);
   }
+`;
+
+const Tab = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border: solid whitesmoke;
+  height: 40px;
+  width: 130px;
+  font-size: 10pt;
+  background-color: ${props => props.selected ? 'whitesmoke' : props.theme.color3};
+  color: ${props => props.selected ? 'black' : 'whitesmoke'};
 `;

@@ -45,14 +45,20 @@ const ShareProjectModal = () => {
               placeholder="Enter someone's username or email"
             />
           </form>
-          <h6>People with access</h6>
+          <h6>People with access:</h6>
           <div>
-            {currProject?.users?.map(user => (
+            
               <div>
-                <span>{user.name}</span>
-                <span>{user.email}</span>
+                <ul>
+                  <li>{currProject?.owner?.username} (owner)</li>
+                  {currProject?.shared_users?.map(user => (
+                    <li>
+                      <span>{user.username} | </span>
+                      <span>{user.email ?? 'no email'}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
           </div>
           <div>
             <button 

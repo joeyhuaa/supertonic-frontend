@@ -156,31 +156,3 @@ select {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
-$sizes: 0, 2, 4, 8, 12, 14, 16, 20, 24, 32, 40, 48, 64, 96, 128, 256;
-
-@each $size in $sizes {
-  .top-right-#{$size} {
-    position: absolute;
-    top: #{$size}px;
-    right: #{$size}px;
-  }
-  
-  .top-left-#{$size} {
-    position: absolute;
-    top: #{$size}px;
-    left: #{$size}px;
-  }
-
-  .top-right-n-#{$size} {
-    position: absolute;
-    top: -#{$size}px;
-    right: -#{$size}px;
-  }
-  
-  .top-left-n-#{$size} {
-    position: absolute;
-    top: -#{$size}px;
-    left: -#{$size}px;
-  }
-}

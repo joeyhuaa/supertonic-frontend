@@ -3,12 +3,9 @@ import { useRouter } from 'next/router';
 import shallow from 'zustand/shallow';
 import styled from 'styled-components';
 
-import { ScaleLoader } from 'react-spinners';
-
 import ModalController from './ModalController';
 import LeftSidebar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
-import MusicPlayer from './MusicPlayer';
 import Overlay from './Overlay';
 
 import { useStore } from '../data/store';
@@ -20,6 +17,8 @@ const Test = React.memo(() => {
     <h1>Test</h1>
   )
 }, true)
+
+//----//
 
 export default function Page({ children }) {
   const router = useRouter();
@@ -43,7 +42,6 @@ export default function Page({ children }) {
       {!router.pathname.includes('shared') && <LeftSidebar />}
       {children}
       {router.pathname.includes('projects') && <RightSidebar />}
-      <MusicPlayer />
     </Wrapper>
   )
 }

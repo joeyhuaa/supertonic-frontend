@@ -48,7 +48,7 @@ export const THEME = {
     color2: COLORS.crimson,
     color3: COLORS.midLightBurgundy,
     color4: COLORS.lightBurgundy,
-    button: null,
-    text: null,
+    button: COLORS.skyblue,
+    text: COLORS.white
   }
 }

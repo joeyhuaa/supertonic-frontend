@@ -21,7 +21,8 @@ import  {
   useProject, 
   useCreateBranch, 
   useDeleteProject,
-  useChangeProjectName, 
+  useChangeProjectName,
+  useDeleteBranch, 
 } from '../hooks/project'
 import Clickable from '../molecules/Clickable'
 import IconClickable from '../molecules/IconClickable'
@@ -90,9 +91,11 @@ const AddBranchForm = ({ project, sourceBranchName }) => {
 
 const TitleHeading = props => {
   const { project } = props
+  const { currBranch } = useStore.getState()
 
   const changeProjectName = useChangeProjectName()
   const deleteProject = useDeleteProject()
+  const deleteBranch = useDeleteBranch()
 
   function changeProjName() {
     let newName = prompt('Enter a new project name', project.name)
@@ -102,10 +105,6 @@ const TitleHeading = props => {
         name: newName
       })
     }
-  }
-
-  function deleteProj() {
-    deleteProject.mutate({ id: project.id })
   }
 
   return (
@@ -120,11 +119,15 @@ const TitleHeading = props => {
           [
             {
               label: 'Delete Project',
-              onClick: deleteProj
+              onClick: () => {
+                deleteProject.mutate({ id: project.id })
+              }
             },
             {
               label: 'Delete Current Branch',
-              onClick: () => {} // todo - finish this func
+              onClick: () => {
+                deleteBranch.mutate({ projId: project.id, branchName: currBranch })
+              }
             }
           ]
         }

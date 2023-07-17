@@ -6,9 +6,8 @@ import { useStore } from '../data/store'
 import moment from 'moment'
 import { FaPlay, FaPause } from 'react-icons/fa'
 
-// todo - figure out how to prevent re-rendering
 function MusicPlayer() {
-  const [currentTime, setCurrentTime] = useState(null) //! this is prob why this component is re-rendering despite React.memo
+  const [currentTime, setCurrentTime] = useState(null)
   const { currSong, setCurrSong, isSongPlaying, setSongPlaying, playPause, currProject } = useStore(state => ({
     currSong: state.currSong,
     setCurrSong: state.setCurrSong,
@@ -23,6 +22,7 @@ function MusicPlayer() {
     console.log('MUSIC PLAYER RENDER')
   }, [])
 
+  // play or pause audio player on state change
   useEffect(() => {
     if (isSongPlaying) {
       music.current.play()  
@@ -92,7 +92,7 @@ function MusicPlayer() {
         {currSong ? currSong.name : null}
       </span>
 
-      <div id='pButton' ref={pButton} onClick={() => playPause(currSong.id)}>
+      <div id='pButton' ref={pButton} onClick={playPause}>
         {isSongPlaying ? (
           <FaPause color='white' className='grow' />
         ) : (
@@ -120,5 +120,4 @@ const Container = styled.section`
   background-color: ${props => props.theme.color4};
 `;
 
-// export default React.memo(MusicPlayer);
 export default MusicPlayer

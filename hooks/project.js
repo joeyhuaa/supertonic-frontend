@@ -127,7 +127,37 @@ export function useCreateBranch() {
   const { setCurrProject } = useStore.getState()
 
   return useMutation(
-    (data) => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projId}/newbranch`, data),
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projId}/new_branch`, data),
+    {
+      onSettled: ({ data }) => {
+        queryClient.invalidateQueries(['projects', data.id])
+        setCurrProject(data) // update state
+      }
+    }
+  )
+}
+
+export function useDeleteBranch() {
+  const queryClient = useQueryClient()
+  const { setCurrBranch } = useStore.getState()
+
+  return useMutation(
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projId}/delete_branch`, data),
+    {
+      onSettled:({ data }) => {
+        queryClient.invalidateQueries(['projects', data.id])
+        setCurrBranch(data.branches[0].name) // switch to first branch in project
+      }
+    }
+  )
+}
+
+export function useInviteUser() {
+  const queryClient = useQueryClient()
+  const { setCurrProject } = useStore.getState()
+
+  return useMutation(
+    data => axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${data.projId}/invite_user`, data),
     {
       onSettled: ({ data }) => {
         queryClient.invalidateQueries(['projects', data.id])

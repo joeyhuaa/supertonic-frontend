@@ -58,16 +58,21 @@ function Song({ song }) {
     })
   }
 
+  //! BUG - 403 occurs when trying to play song, sometimes after reloading the app... is it a problem with AWS? this wasn't happening before
   function toggleSong(song) {
     if (currSong) {
+      console.log(song)
       if (song.id === currSong?.id) {
+        console.log('same song')
         playPause()
       } else {
+        console.log('new song')
         playPause()
         setCurrSong(song)
         // todo - make this a cb AFTER currSong is set - playPause()
       }
     } else {
+      console.log('new song 2')
       setCurrSong(song)
       playPause()
     }

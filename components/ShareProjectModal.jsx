@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
-
 import { ClipLoader } from 'react-spinners'
-
 import { useStore } from '../data/store'
-
 import Modal from '../molecules/Modal'
+import { useInviteUser } from '../hooks/project'
 
 const ShareProjectModal = () => {
   const { currProject } = useStore.getState()
+  const inviteUser = useInviteUser()
 
   /**
    * * generate a shareable link, copy it to clipboard
@@ -25,10 +24,6 @@ const ShareProjectModal = () => {
     }
   }
 
-  function onSubmit() {
-
-  }
-
   return (
     <Modal 
       modalId='share-project-modal'
@@ -38,7 +33,10 @@ const ShareProjectModal = () => {
           <form
             id='share-form'
             style={{ marginBottom: '15px' }}
-            onSubmit={onSubmit}
+            onSubmit={e => {
+              e.preventDefault()
+              inviteUser.mutate({ projId: currProject.id, newUserEmail: 'joeyhua17@gmail.com'})
+            }}
           >
             <input 
               style={{ width: '100%' }}
@@ -47,18 +45,17 @@ const ShareProjectModal = () => {
           </form>
           <h6>People with access:</h6>
           <div>
-            
-              <div>
-                <ul>
-                  <li>{currProject?.owner?.username} (owner)</li>
-                  {currProject?.shared_users?.map(user => (
-                    <li>
-                      <span>{user.username} | </span>
-                      <span>{user.email ?? 'no email'}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div>
+              <ul>
+                <li>{currProject?.owner?.username} (owner)</li>
+                {currProject?.shared_users?.map(user => (
+                  <li>
+                    <span>{user.username} | </span>
+                    <span>{user.email ?? 'no email'}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div>
             <button 

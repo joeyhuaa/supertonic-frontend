@@ -7,7 +7,15 @@
   z-index: 1;
   flex: 100%;
   align-self: flex-end;
+  position: absolute;
+  bottom: 0;
   // border: solid 1px pink;
+
+  .play {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
 
   #pButton {
     width: 20px;
